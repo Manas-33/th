@@ -15,23 +15,42 @@ parent(kareena,taimur).
 parent(kareena,sara).
 parent(karishma,raj).
 parent(sara,aarav).
+
+# X is the husband of Y if X is a parent of Z, Y is a parent of Z, and X is male.
 husband(X,Y):- parent(X,Z),parent(Y,Z),male(X).
 wife(X,Y):- parent(X,Z),parent(Y,Z),female(X).
+
+# X is the mother of Y if X is a parent of Y and X is female.
 mother(X,Y):- parent(X,Y),female(X).
 father(X,Y):- parent(X,Y),male(X).
+
+#  X is the son of Y if X is male and Y is a parent of X.
 son(X,Y):- male(X),parent(Y,X).
 daughter(X,Y):- female(X),parent(Y,X).
+
 haschild(X):- parent(X,_).
+
+# X is the sister of Y if there exists a Z such that Z is a parent of both X and Y, X is female, and X is not equal to Y.
 sister(X,Y):- parent(Z,X),parent(Z,Y),female(X),X\==Y.
 brother(X,Y):-parent(Z,X),parent(Z,Y),male(X),X\==Y.
+
+
 paternal_uncle(X,Y):- father(Z,Y),brother(X,Z).
 maternal_uncle(X,Y):- mother(Z,Y),brother(X,Z).
+
+
 paternal_aunt(X,Y):- father(Z,Y),sister(X,Z).
 maternal_aunt(X,Y):- mother(Z,Y),sister(X,Z).
+
+
 niece(X,Y):- female(X),parent(Z,X),parent(W,Z),parent(W,Y),Z\==Y.
 nephew(X,Y):- male(X),parent(Z,X),parent(W,Z),parent(W,Y),Z\==Y.
+
+
 grandfather(X,Y):- parent(X,Z),parent(Z,Y),male(X).
 grandmother(X,Y):- parent(X,Z),parent(Z,Y),female(X).
+
+
 cousin_brother(X,Y):-
 male(X),parent(Z,Y),parent(W,X),parent(T,W),parent(T,Z),Z\==W,X\==Y.
 cousin_sister(X,Y):-

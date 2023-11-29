@@ -57,7 +57,7 @@ add(X,L,[X|L]).
 % ?- canget(state(atwindow, onbox, atwindow, hasnot), Plan ).
 % No
 
-% ?- canget(state(Monkey, onfloor, atwindow, hasnot), Plan).
+% ?- canget(state(atwindow, onbox, atwindow, hasnot), Plan ).
 % Monkey = atwindow
 % Plan = [push(atwindow, middle), climb, grasp]
 % Yes
